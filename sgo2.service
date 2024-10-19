@@ -1,0 +1,9 @@
+[Unit]
+Description=Surface Go 2 temperature optimizer.
+
+[Service]
+WorkingDirectory=/home/chr/Documents/sgo2-optimizer
+ExecStart=python3 -u main.py
+
+[Install]
+WantedBy=multi-user.target
