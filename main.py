@@ -199,7 +199,7 @@ def raise_max_freq():
 
 
 def calculate_cpu_freq():
-    print('keep_below_temperature:', keep_below_temperature, 'actual_temperature:', actual_temperature)
+    # print('keep_below_temperature:', keep_below_temperature, 'actual_temperature:', actual_temperature)
 
     if actual_temperature > keep_below_temperature + temp_error:
         lower_max_freq()
