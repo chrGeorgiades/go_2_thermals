@@ -1,3 +1,0 @@
-polling_delay=5
-#keep_below_temperature=60000
-keep_below_temperature=75000
