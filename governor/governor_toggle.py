@@ -1,15 +1,29 @@
+import os, socket
+
 current_governor = ''
 temp_map = {'power': 50, 'balance_performance': 65, 'performance': 85}
 governor_cycle = ['power', 'balance_performance', 'performance']
-governor_file_option = '/home/chr/Documents/workshop/sgo2-optimizer/governor/governor_option.txt'
+
+governor_acpi = '/sys/devices/system/cpu/cpufreq/policy0/energy_performance_preference'
+
+SOCKET_PATH = "/tmp/sgo2_governor.sock"
+
+
+def connect_socket():
+    client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    client.connect(SOCKET_PATH)
+
+    print(f"Client connected to ", SOCKET_PATH)
+
+    return client
+
 
 def get_next_governor():
     try:
-        # Read the desired governor option from file
-        with open(governor_file_option, 'r') as f:
+        with open(governor_acpi, 'r') as f:
             current_governor = f.read().strip()
+            print('current_governor:', current_governor)
         
-        # Check if governor is in the map
         if current_governor not in temp_map:
             print(f"Governor '{current_governor}' not recognized. Valid options: {list(temp_map.keys())}")
             current_governor = 'performance'
@@ -18,8 +32,13 @@ def get_next_governor():
         next_index = (index + 1) % len(governor_cycle)
         governor = governor_cycle[next_index]
 
-        with open(governor_file_option, 'w') as f:
-            f.write(governor)
+        client = connect_socket()
+
+        try:
+            client.sendall(governor.encode("utf-8"))
+            print(f"Sent to server: {governor.encode("utf-8")}")
+        finally:
+            client.close()
         
         print(f"Governor '{governor}' applied successfully.")
 
@@ -34,6 +53,7 @@ def get_next_governor():
 
 def main():
     get_next_governor()
+
 
 if __name__ == "__main__":
     main()

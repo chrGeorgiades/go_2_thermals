@@ -6,18 +6,18 @@ import atexit
 import cpu_utils
 
 
-polling_delay = 5
+polling_delay = 1   # (seconds)
 
 
-if __name__ == "__main__":
-    #atexit.register(optimizer_utils.restore_defaults)
-    
+if __name__ == "__main__":   
     cpu = cpu_utils.CPU()
-    print(cpu)
+    #print(cpu)
+
+    atexit.register(cpu.restore_defaults)
 
     while True:
-        cpu.update_readings()
-        cpu.update_cpu_limits()
-        print(cpu)
+        #cpu.update_readings()
+        #cpu.update_cpu_limits()
+        print(cpu, flush=True)
         time.sleep(polling_delay)
 

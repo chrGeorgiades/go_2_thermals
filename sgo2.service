@@ -2,7 +2,7 @@
 Description=Surface Go 2 temperature optimizer.
 
 [Service]
-WorkingDirectory=/home/chr/Documents/workshop/sgo2-optimizer
+WorkingDirectory=/home/chr/Documents/Workshop/sgo2-optimizer
 ExecStart=python3 -u main.py
 
 [Install]
