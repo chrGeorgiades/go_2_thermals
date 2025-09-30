@@ -9,9 +9,10 @@ A CPU frequency / thermal control service, originally designed for the Surface G
 - [License](#license)
 
 ## Features
-- Protects CPU from shutting down due to thermal limit
-- Controls CPU frequency depending on governor setting
-- Controls CPU frequency based on thermal limits depending on governor setting
+- Protects CPU from shutting down due to overheating.
+- Reduces battery usage by limiting CPU power consumption.
+- Controls CPU max frequency depending on governor setting.
+- Dynamically adjusts CPU max frequency based on preset thermal limits, set by the governor.
 
 ## Installation
 Install service by editing and copying the provided systemctl template file:
