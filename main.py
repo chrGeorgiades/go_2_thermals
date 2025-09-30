@@ -16,8 +16,6 @@ if __name__ == "__main__":
     atexit.register(cpu.restore_defaults)
 
     while True:
-        #cpu.update_readings()
-        #cpu.update_cpu_limits()
         print(cpu, flush=True)
         time.sleep(polling_delay)
 

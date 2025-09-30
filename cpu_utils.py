@@ -260,4 +260,5 @@ class CPU:
     # Restore Defaults
     def restore_defaults(self):
         print('Restoring defaults...')
-        self.apply_freq_max(freq_map.get('performance'))
+        #self.apply_freq_max(freq_map.get('performance'))
+        self.apply_governor('performance')

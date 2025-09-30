@@ -1,9 +1,0 @@
-[Unit]
-Description=Surface Go 2 governor setter.
-
-[Service]
-WorkingDirectory=/home/chr/Documents/workshop/sgo2-optimizer/governor
-ExecStart=python3 -u governor_setter.py
-
-[Install]
-WantedBy=multi-user.target

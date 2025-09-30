@@ -1,14 +1,14 @@
 import os, socket
 
-current_governor = ''
+SOCKET_PATH = "/tmp/sgo2_governor.sock"
+
 temp_map = {'power': 50, 'balance_performance': 65, 'performance': 85}
 governor_cycle = ['power', 'balance_performance', 'performance']
 
 governor_acpi = '/sys/devices/system/cpu/cpufreq/policy0/energy_performance_preference'
 
-SOCKET_PATH = "/tmp/sgo2_governor.sock"
 
-
+# Connect to the socket 
 def connect_socket():
     client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     client.connect(SOCKET_PATH)
@@ -18,8 +18,11 @@ def connect_socket():
     return client
 
 
+# Toggle a governor change for the CPU
 def get_next_governor():
     try:
+        current_governor = ''
+        
         with open(governor_acpi, 'r') as f:
             current_governor = f.read().strip()
             print('current_governor:', current_governor)
